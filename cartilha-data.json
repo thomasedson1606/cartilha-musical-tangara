@@ -1,0 +1,470 @@
+{
+  "ensaiosLocaisTangara": [
+    {
+      "dia": "1ª Segunda-Feira",
+      "horas": "19:30",
+      "comum": "Central",
+      "encarregado": "Ir. Jair"
+    },
+    {
+      "dia": "1ª Quarta-Feira",
+      "horas": "19:30",
+      "comum": "Califórnia",
+      "encarregado": "Ir. Eliel"
+    },
+    {
+      "dia": "1ª Sexta-Feira",
+      "horas": "19:30",
+      "comum": "Buritis",
+      "encarregado": "Ir. Abiner"
+    },
+    {
+      "dia": "2ª Segunda-Feira",
+      "horas": "19:30",
+      "comum": "Esmeralda",
+      "encarregado": "Ir. Thiago"
+    },
+    {
+      "dia": "2ª Sexta-Feira",
+      "horas": "19:30",
+      "comum": "Ype",
+      "encarregado": "Ir. Ivaimir"
+    },
+    {
+      "dia": "2ª Sábado",
+      "horas": "19:30",
+      "comum": "Acapulco",
+      "encarregado": "Ir. Valdinei"
+    },
+    {
+      "dia": "2ª Sábado",
+      "horas": "18:00",
+      "comum": "Gleba Triângulo",
+      "encarregado": "Ir. Lucas"
+    },
+    {
+      "dia": "3ª Sexta-Feira",
+      "horas": "19:30",
+      "comum": "Tarumã",
+      "encarregado": "Ir. Assis"
+    },
+    {
+      "dia": "3ª Sábado",
+      "horas": "19:30",
+      "comum": "Terezinha",
+      "encarregado": "Ir. Lé"
+    },
+    {
+      "dia": "3ª Domingo",
+      "horas": "18:00",
+      "comum": "Conselheiro",
+      "encarregado": "Ir. Silvano"
+    },
+    {
+      "dia": "4ª Quarta",
+      "horas": "19:30",
+      "comum": "Mirante",
+      "encarregado": "Ir. Henrique"
+    },
+    {
+      "dia": "4ª Sexta-Feira",
+      "horas": "19:30",
+      "comum": "Progresso",
+      "encarregado": "Ir. Thomas"
+    },
+    {
+      "dia": "4ª Sábado",
+      "horas": "18:00",
+      "comum": "Gleba 28",
+      "encarregado": "-"
+    },
+    {
+      "dia": "4ª Sábado",
+      "horas": "19:30",
+      "comum": "Dona Julia",
+      "encarregado": "Ir. Kelves"
+    },
+    {
+      "dia": "4ª Domingo",
+      "horas": "18:00",
+      "comum": "São Jorge",
+      "encarregado": "-"
+    },
+    {
+      "dia": "Último Sábado",
+      "horas": "19:30",
+      "comum": "Alto da Boa Vista",
+      "encarregado": "Ir. Washington"
+    }
+  ],
+  "ensaiosLocaisRegiao": [
+    {
+      "dia": "1ª Segunda-Feira",
+      "horas": "19:30",
+      "cidade": "Alto Paraguai",
+      "comum": "Central",
+      "encarregado": "Ir. Jairo"
+    },
+    {
+      "dia": "3ª Segunda-Feira",
+      "horas": "19:30",
+      "cidade": "Arenápolis",
+      "comum": "Central",
+      "encarregado": "Ir. Jamilson"
+    },
+    {
+      "dia": "3ª Segunda-Feira",
+      "horas": "19:30",
+      "cidade": "Barra do Bugres",
+      "comum": "Central",
+      "encarregado": "-"
+    },
+    {
+      "dia": "2ª Segunda-Feira",
+      "horas": "19:30",
+      "cidade": "Barra do Bugres",
+      "comum": "Maracañã",
+      "encarregado": "Ir Josué"
+    },
+    {
+      "dia": "4ª Segunda-Feira",
+      "horas": "19:30",
+      "cidade": "Barra do Bugres",
+      "comum": "Alvorecer",
+      "encarregado": "Ir. Gilberto"
+    },
+    {
+      "dia": "1ª Domingo (Mês Par)",
+      "horas": "17:30",
+      "cidade": "Barra do Bugres",
+      "comum": "Assari",
+      "encarregado": "-"
+    },
+    {
+      "dia": "2ª Segunda-Feira",
+      "horas": "19:30",
+      "cidade": "Campo Novo do Parecis",
+      "comum": "Central",
+      "encarregado": "Ir. Jovelino"
+    },
+    {
+      "dia": "4ª Segunda-Feira",
+      "horas": "19:30",
+      "cidade": "Campo Novo do Parecis",
+      "comum": "Palmeiras",
+      "encarregado": "Ir. João Ferreira"
+    },
+    {
+      "dia": "4ª Sexta-Feira",
+      "horas": "19:30",
+      "cidade": "Campo Novo do Parecis",
+      "comum": "Itália",
+      "encarregado": "Ir. Valmir"
+    },
+    {
+      "dia": "3ª Domingo",
+      "horas": "17:00",
+      "cidade": "Campo Novo do Parecis",
+      "comum": "Itamaraty",
+      "encarregado": "-"
+    },
+    {
+      "dia": "2ª Domingo",
+      "horas": "17:00",
+      "cidade": "Campo Novo do Parecis",
+      "comum": "Marechal Rondon",
+      "encarregado": "Ir. Jessé"
+    },
+    {
+      "dia": "3ª Terça-Feira",
+      "horas": "19:30",
+      "cidade": "Denise",
+      "comum": "Central",
+      "encarregado": "Ir. Junior"
+    },
+    {
+      "dia": "4ª Sábado",
+      "horas": "19:30",
+      "cidade": "Denise",
+      "comum": "Fazenda Palmital",
+      "encarregado": "-"
+    },
+    {
+      "dia": "2ª Segunda-Feira",
+      "horas": "19:40",
+      "cidade": "Diamantino",
+      "comum": "Central",
+      "encarregado": "Ir. João Paulo"
+    },
+    {
+      "dia": "Última Segunda-Feira",
+      "horas": "19:30",
+      "cidade": "Diamantino",
+      "comum": "Novo Diamantino",
+      "encarregado": "Ir. Wiki"
+    },
+    {
+      "dia": "3ª Domingo (60 dias)",
+      "horas": "19:00",
+      "cidade": "Diamantino",
+      "comum": "Deciolancia",
+      "encarregado": "-"
+    },
+    {
+      "dia": "2ª Terça-Feira",
+      "horas": "19:30",
+      "cidade": "Nova Marilândia",
+      "comum": "Central",
+      "encarregado": "Ir. Diego"
+    },
+    {
+      "dia": "4ª Domingo",
+      "horas": "17:30",
+      "cidade": "Nova Olímpia",
+      "comum": "Central",
+      "encarregado": "Ir. Luan"
+    },
+    {
+      "dia": "4ª Domingo",
+      "horas": "17:00",
+      "cidade": "Santo Afonso",
+      "comum": "Central",
+      "encarregado": "Ir. Wesley"
+    },
+    {
+      "dia": "2ª Segunda-Feira",
+      "horas": "19:30",
+      "cidade": "Sapezal",
+      "comum": "Central",
+      "encarregado": "Ir. Vicente"
+    },
+    {
+      "dia": "3ª Segunda-Feira",
+      "horas": "19:30",
+      "cidade": "Sapezal",
+      "comum": "Cidezal III",
+      "encarregado": "Ir. Cletion"
+    },
+    {
+      "dia": "4ª Segunda-Feira",
+      "horas": "19:30",
+      "cidade": "Sapezal",
+      "comum": "Alvorada",
+      "encarregado": "Ir. Maciel"
+    }
+  ],
+  "encarregadosRegionais": [
+    {
+      "nome": "Ir. Gilberto Pereira",
+      "cidade": "Alto Paraguai",
+      "bairro": "Central"
+    },
+    {
+      "nome": "Ir. Jeffer Sensato",
+      "cidade": "Sapezal",
+      "bairro": "Central"
+    },
+    {
+      "nome": "Ir. Lucas",
+      "cidade": "Barra do Bugres",
+      "bairro": "Central"
+    },
+    {
+      "nome": "Ir. Claudio",
+      "cidade": "Campo Novo do Parecis",
+      "bairro": "Central"
+    },
+    {
+      "nome": "Ir. Wenderson Porfílio",
+      "cidade": "Arenápolis",
+      "bairro": "Central"
+    },
+    {
+      "nome": "Ir. Silas Godoy",
+      "cidade": "Tangará da Serra",
+      "bairro": "Central"
+    },
+    {
+      "nome": "Ir. Rhomys de Paula",
+      "cidade": "Tangará da Serra",
+      "bairro": "Central"
+    }
+  ],
+  "examinadoras": [
+    {
+      "nome": "Daniella Nunes",
+      "cidade": "Tangará da Serra",
+      "bairro": "Califórnia"
+    },
+    {
+      "nome": "Maria de Lourdes",
+      "cidade": "Tangará da Serra",
+      "bairro": "Esmeralda"
+    }
+  ],
+  "secretariaMusical": [
+    {
+      "nome": "Ir. Carlos Gustavo",
+      "funcao": "Ir."
+    },
+    {
+      "nome": "Ir. Francklin",
+      "funcao": "Ir."
+    }
+  ],
+  "hinoSilencio": {
+    "exemplos": [
+      {
+        "titulo": "Culto com início às 19:00",
+        "eventos": [
+          {
+            "hora": "18:30",
+            "descricao": "A organista inicia a meia hora"
+          },
+          {
+            "hora": "18:53",
+            "descricao": "Finaliza a meia hora"
+          },
+          {
+            "hora": "",
+            "descricao": "Na sequência o encarregado fará o anúncio do hino do silêncio"
+          },
+          {
+            "hora": "18:54",
+            "descricao": "A orquestra realiza a afinação"
+          },
+          {
+            "hora": "18:55",
+            "descricao": "A orquestra toca o hino do silêncio"
+          }
+        ]
+      },
+      {
+        "titulo": "Culto com início às 19:30",
+        "eventos": [
+          {
+            "hora": "19:00",
+            "descricao": "A organista inicia a meia hora"
+          },
+          {
+            "hora": "19:23",
+            "descricao": "Finaliza a meia hora"
+          },
+          {
+            "hora": "",
+            "descricao": "Na sequência o encarregado fará o anúncio do hino do silêncio"
+          },
+          {
+            "hora": "19:24",
+            "descricao": "A orquestra realiza a afinação"
+          },
+          {
+            "hora": "19:25",
+            "descricao": "A orquestra toca o hino do silêncio"
+          }
+        ]
+      }
+    ],
+    "observacao": "A Meia Hora abrange o conjunto de hinos executados pela organista finalizando com o Hino do Silêncio e fazem parte da ordem do culto"
+  },
+  "recomendacoes": [
+    "Manter a limpeza e higienização de seu instrumento;",
+    "Frequentar os ensaios e todos os demais serviços da Obra de Deus;",
+    "Chegar nos cultos antes da afinação, orar e manter-se em comunhão;",
+    "Observar a Lei do Silêncio – tocar suave ouvindo os demais;",
+    "Não fazer apodituras, floreados, etc. Executar somente o que está escrito no Hinário;",
+    "Manter os padrões dos instrumentos da Orquestra, sem alterações e inovações;",
+    "Não ter por costume faltar aos cultos de sua Comum para congregar em outras;",
+    "Comunicar o encarregado quando ausentar-se dos cultos e ensaios;",
+    "Executar somente a voz principal e na tessitura correta do instrumento durante os serviços, alternância de vozes deve ocorrer apenas a pedido do encarregado;",
+    "As organistas devem transmitir firmeza e clareza nas introduções;",
+    "Procurar sentar-se no banco das organistas, mesmo não sendo o dia de tocar;",
+    "Comunicar o encarregado quando ausentar-se dos cultos e ensaios"
+  ],
+  "ondePossoTocar": {
+    "descricao": "Categoria / Tipo de Culto",
+    "categorias": [
+      {
+        "tipo": "Ensaios Locais e Regionais",
+        "musicoOficializado": "Sim",
+        "musicoNaoOficializado": "Sim",
+        "musicoRJMBatizado": "Sim",
+        "musicoRJMNaoBatizado": "Sim",
+        "musicoEnsaios": "Sim"
+      },
+      {
+        "tipo": "Reunião de Jovens e Menores",
+        "musicoOficializado": "Sim",
+        "musicoNaoOficializado": "Sim",
+        "musicoRJMBatizado": "Sim",
+        "musicoRJMNaoBatizado": "Sim",
+        "musicoEnsaios": "Não"
+      },
+      {
+        "tipo": "Culto para jovens",
+        "musicoOficializado": "Sim",
+        "musicoNaoOficializado": "Sim",
+        "musicoRJMBatizado": "Sim",
+        "musicoRJMNaoBatizado": "Sim",
+        "musicoEnsaios": "Não"
+      },
+      {
+        "tipo": "Reunião para Mocidade",
+        "musicoOficializado": "Sim",
+        "musicoNaoOficializado": "Sim¹",
+        "musicoRJMBatizado": "Sim¹",
+        "musicoRJMNaoBatizado": "Não",
+        "musicoEnsaios": "Não"
+      },
+      {
+        "tipo": "Reunião de Evangelização",
+        "musicoOficializado": "Sim",
+        "musicoNaoOficializado": "Sim",
+        "musicoRJMBatizado": "Sim",
+        "musicoRJMNaoBatizado": "Sim",
+        "musicoEnsaios": "Não"
+      },
+      {
+        "tipo": "Batismo",
+        "musicoOficializado": "Sim",
+        "musicoNaoOficializado": "Sim¹",
+        "musicoRJMBatizado": "Não",
+        "musicoRJMNaoBatizado": "Não",
+        "musicoEnsaios": "Não"
+      },
+      {
+        "tipo": "Culto na Comum Congregação",
+        "musicoOficializado": "Sim",
+        "musicoNaoOficializado": "Sim",
+        "musicoRJMBatizado": "Não",
+        "musicoRJMNaoBatizado": "Não",
+        "musicoEnsaios": "Não"
+      },
+      {
+        "tipo": "Culto em todas as Congregações",
+        "musicoOficializado": "Sim",
+        "musicoNaoOficializado": "Não",
+        "musicoRJMBatizado": "Não",
+        "musicoRJMNaoBatizado": "Não",
+        "musicoEnsaios": "Não"
+      }
+    ],
+    "observacao": "¹ Somente na Comum Congregação"
+  },
+  "posicaoOrquestra": {
+    "familias": [
+      {
+        "familia": "Cordas",
+        "instrumentos": "Violino; Viola e Violoncelo; Acordeon"
+      },
+      {
+        "familia": "Madeiras",
+        "instrumentos": "Flauta; Oboé/d'amore; Corne inglês; Fagote; Clarinete; Clarinete Alto/Baixo; Sax Soprano; Sax Alto; Sax Tenor; Sax Barítono"
+      },
+      {
+        "familia": "Metais",
+        "instrumentos": "Cornet/Trompete; Flugelhorn; Trompa; Trombone/Trombonito; Barítono; Eufônio; Tubas"
+      }
+    ]
+  }
+}
