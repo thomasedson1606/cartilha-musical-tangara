@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, Download, CalendarDays } from "lucide-react";
@@ -50,18 +51,22 @@ const getKey = (coluna: Coluna): keyof Culto => {
 
 export default function CultosTangara() {
   const [, navigate] = useLocation();
+  const [exportando, setExportando] = useState(false);
 
   const exportarImagem = async () => {
     const element = document.getElementById("tabela-export");
-    if (!element) return;
+    if (!element) { alert("Elemento não encontrado para exportação."); return; }
+    setExportando(true);
     try {
-      const canvas = await html2canvas(element, { scale: 2 });
+      const canvas = await html2canvas(element, { scale: 2, useCORS: true });
       const link = document.createElement("a");
       link.href = canvas.toDataURL("image/png");
       link.download = "cultos-tangara-da-serra.png";
       link.click();
     } catch (error) {
-      console.error("Erro ao exportar imagem:", error);
+      alert("Erro ao exportar imagem: " + (error instanceof Error ? error.message : error));
+    } finally {
+      setExportando(false);
     }
   };
 
@@ -103,7 +108,7 @@ export default function CultosTangara() {
               className="border-accent/30 text-accent hover:bg-accent hover:text-white flex gap-2"
             >
               <Download className="w-4 h-4" />
-              Exportar Imagem
+              {exportando ? "Exportando..." : "Exportar Imagem"}
             </Button>
           </div>
         </CardHeader>

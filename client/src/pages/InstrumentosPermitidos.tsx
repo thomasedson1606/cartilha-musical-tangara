@@ -76,11 +76,14 @@ export default function InstrumentosPermitidos() {
     ? todosInstrumentos.find(i => i.nome === filtroInstrumento)
     : null;
 
+  const [exportando, setExportando] = useState<"imagem" | "pdf" | null>(null);
+
   const exportarPDF = async () => {
     const element = document.getElementById("tabela-export");
-    if (!element) return;
+    if (!element) { alert("Elemento não encontrado para exportação."); return; }
+    setExportando("pdf");
     try {
-      const canvas = await html2canvas(element, { scale: 2 });
+      const canvas = await html2canvas(element, { scale: 2, useCORS: true });
       const pdf = new jsPDF("l", "mm", "a4");
       const imgData = canvas.toDataURL("image/png");
       const imgWidth = 280;
@@ -88,21 +91,26 @@ export default function InstrumentosPermitidos() {
       pdf.addImage(imgData, "PNG", 5, 10, imgWidth, imgHeight);
       pdf.save("instrumentos-permitidos.pdf");
     } catch (error) {
-      console.error("Erro ao exportar PDF:", error);
+      alert("Erro ao exportar PDF: " + (error instanceof Error ? error.message : error));
+    } finally {
+      setExportando(null);
     }
   };
 
   const exportarImagem = async () => {
     const element = document.getElementById("tabela-export");
-    if (!element) return;
+    if (!element) { alert("Elemento não encontrado para exportação."); return; }
+    setExportando("imagem");
     try {
-      const canvas = await html2canvas(element, { scale: 2 });
+      const canvas = await html2canvas(element, { scale: 2, useCORS: true });
       const link = document.createElement("a");
       link.href = canvas.toDataURL("image/png");
       link.download = "instrumentos-permitidos.png";
       link.click();
     } catch (error) {
-      console.error("Erro ao exportar imagem:", error);
+      alert("Erro ao exportar imagem: " + (error instanceof Error ? error.message : error));
+    } finally {
+      setExportando(null);
     }
   };
 
@@ -154,19 +162,21 @@ export default function InstrumentosPermitidos() {
               variant="outline"
               size="sm"
               onClick={exportarImagem}
+              disabled={exportando !== null}
               className="border-accent/30 text-accent hover:bg-accent hover:text-white flex gap-2"
             >
               <Download className="w-4 h-4" />
-              Imagem
+              {exportando === "imagem" ? "Exportando..." : "Imagem"}
             </Button>
             <Button
               variant="outline"
               size="sm"
               onClick={exportarPDF}
+              disabled={exportando !== null}
               className="border-accent/30 text-accent hover:bg-accent hover:text-white flex gap-2"
             >
               <Download className="w-4 h-4" />
-              PDF
+              {exportando === "pdf" ? "Exportando..." : "PDF"}
             </Button>
           </div>
         </CardContent>
