@@ -16,6 +16,7 @@ import Recomendacoes from "./pages/Recomendacoes";
 import OndePossoTocar from "./pages/OndePossoTocar";
 import PosicaoOrquestra from "./pages/PosicaoOrquestra";
 import CalendarioEnsaio from "./pages/CalendarioEnsaio";
+import CultosTangara from "./pages/CultosTangara";
 import { Music } from "lucide-react";
 
 function PageLayout({ children }: { children: React.ReactNode }) {
@@ -134,6 +135,13 @@ function Router() {
         {() => (
           <PageLayout>
             <CalendarioEnsaio />
+          </PageLayout>
+        )}
+      </Route>
+      <Route path="/cultos-tangara">
+        {() => (
+          <PageLayout>
+            <CultosTangara />
           </PageLayout>
         )}
       </Route>
