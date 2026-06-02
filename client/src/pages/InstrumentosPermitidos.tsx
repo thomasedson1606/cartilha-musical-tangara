@@ -249,8 +249,9 @@ export default function InstrumentosPermitidos() {
         </Card>
       )}
 
-      {/* Tabelas */}
+      {/* Tabelas + Observações para export */}
       <div id="instrumentos-export" className="space-y-8">
+        <div className="space-y-8">
         {familiasFiltradas.map((familia) => (
           <div key={familia.nome} id={`familia-${familia.nome}`}>
             <Card className="border-border/50">
@@ -292,10 +293,10 @@ export default function InstrumentosPermitidos() {
             </Card>
           </div>
         ))}
-      </div>
+        </div>
 
       {/* Observações */}
-      <Card className="border-l-4 border-l-accent bg-secondary/5">
+        <Card className="border-l-4 border-l-accent bg-secondary/5">
         <CardHeader>
           <CardTitle className="text-primary">Observações</CardTitle>
         </CardHeader>
@@ -310,6 +311,7 @@ export default function InstrumentosPermitidos() {
           </div>
         </CardContent>
       </Card>
+      </div>
     </div>
   );
 }

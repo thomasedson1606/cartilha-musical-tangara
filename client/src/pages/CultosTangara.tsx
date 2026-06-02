@@ -118,6 +118,7 @@ export default function CultosTangara() {
         </p>
       </div>
 
+      <div id="tabela-export" className="space-y-8">
       <Card className="border-border/50">
         <CardHeader>
           <div className="flex items-center justify-between flex-wrap gap-4">
@@ -150,7 +151,7 @@ export default function CultosTangara() {
           </div>
         </CardHeader>
         <CardContent className="overflow-x-auto">
-          <div id="tabela-export" style={{ minWidth: "800px" }}>
+          <div style={{ minWidth: "800px" }}>
             <table className="w-full border-collapse text-sm">
               <thead>
                 <tr className="border-b-2 border-accent/20">
@@ -212,6 +213,7 @@ export default function CultosTangara() {
           <p>• <strong>RJM</strong> (Reunião de Jovens e Menores): Domingo às <strong>09:00</strong> horas nas comuns indicadas.</p>
         </CardContent>
       </Card>
+      </div>
     </div>
   );
 }
