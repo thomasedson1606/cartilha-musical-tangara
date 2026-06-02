@@ -1,7 +1,7 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Music, Users, Clock, BookOpen, Zap, Calendar, Globe, ExternalLink, CalendarDays } from "lucide-react";
+import { Music, Users, Clock, BookOpen, Zap, Calendar, Globe, ExternalLink, CalendarDays, Guitar } from "lucide-react";
 import { Link } from "wouter";
 
 const menuItems = [
@@ -88,6 +88,13 @@ const menuItems = [
     description: "Dias e horários dos cultos em todas as comunas",
     href: "/cultos-tangara",
     color: "text-rose-600",
+  },
+  {
+    icon: Guitar,
+    title: "Instrumentos Permitidos",
+    description: "Voz principal e alternativa de cada instrumento na orquestra",
+    href: "/instrumentos-permitidos",
+    color: "text-violet-600",
   },
 ];
 
