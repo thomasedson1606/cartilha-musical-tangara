@@ -1,7 +1,7 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Music, Users, Clock, BookOpen, Zap, Calendar, Globe, ExternalLink, CalendarDays, Guitar } from "lucide-react";
+import { Music, Users, Clock, BookOpen, Zap, Calendar, Globe, ExternalLink, CalendarDays, Music3 } from "lucide-react";
 import { Link } from "wouter";
 
 const menuItems = [
@@ -90,7 +90,7 @@ const menuItems = [
     color: "text-rose-600",
   },
   {
-    icon: Guitar,
+    icon: Music3,
     title: "Instrumentos Permitidos",
     description: "Voz principal e alternativa de cada instrumento na orquestra",
     href: "/instrumentos-permitidos",

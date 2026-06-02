@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ArrowLeft, Download, Saxophone } from "lucide-react";
+import { ArrowLeft, Download, Music3 } from "lucide-react";
 import { useLocation } from "wouter";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
@@ -120,7 +120,7 @@ export default function InstrumentosPermitidos() {
 
       <div className="text-center space-y-4">
         <div className="flex justify-center">
-          <Saxophone className="w-12 h-12 text-accent" />
+          <Music3 className="w-12 h-12 text-accent" />
         </div>
         <h1 className="text-4xl font-bold text-primary">Instrumentos Permitidos</h1>
         <p className="text-lg text-muted-foreground">
