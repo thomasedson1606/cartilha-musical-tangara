@@ -59,7 +59,7 @@ export default function CultosTangara() {
   const capturarTabela = async () => {
     const element = document.getElementById("tabela-export");
     if (!element) { alert("Elemento não encontrado para exportação."); return null; }
-    return await html2canvas(element, { scale: 2, useCORS: true });
+    return await html2canvas(element, { scale: 2, useCORS: true, backgroundColor: "#faf9f7" });
   };
 
   const exportarImagem = async () => {
@@ -85,9 +85,18 @@ export default function CultosTangara() {
       if (!canvas) return;
       const pdf = new jsPDF("l", "mm", "a4");
       const imgData = canvas.toDataURL("image/png");
-      const imgWidth = 280;
+      const pageWidth = 297;
+      const pageHeight = 210;
+      const margin = 10;
+      const imgWidth = pageWidth - 2 * margin;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      pdf.addImage(imgData, "PNG", 5, 10, imgWidth, imgHeight);
+      const maxHeight = pageHeight - 2 * margin;
+      if (imgHeight > maxHeight) {
+        const ratio = maxHeight / imgHeight;
+        pdf.addImage(imgData, "PNG", margin, margin, imgWidth * ratio, maxHeight);
+      } else {
+        pdf.addImage(imgData, "PNG", margin, (pageHeight - imgHeight) / 2, imgWidth, imgHeight);
+      }
       pdf.save("cultos-tangara-da-serra.pdf");
     } catch (error) {
       alert("Erro ao exportar PDF: " + (error instanceof Error ? error.message : error));
@@ -118,36 +127,36 @@ export default function CultosTangara() {
         </p>
       </div>
 
+      <div className="flex items-center justify-end flex-wrap gap-4 mb-2">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={exportarImagem}
+          disabled={exportando !== null}
+          className="border-accent/30 text-accent hover:bg-accent hover:text-white flex gap-2"
+        >
+          <Download className="w-4 h-4" />
+          {exportando === "imagem" ? "Exportando..." : "Imagem"}
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={exportarPDF}
+          disabled={exportando !== null}
+          className="border-accent/30 text-accent hover:bg-accent hover:text-white flex gap-2"
+        >
+          <Download className="w-4 h-4" />
+          {exportando === "pdf" ? "Exportando..." : "PDF"}
+        </Button>
+      </div>
       <div id="tabela-export" className="space-y-8">
       <Card className="border-border/50">
         <CardHeader>
-          <div className="flex items-center justify-between flex-wrap gap-4">
-            <div>
-              <CardTitle className="text-primary">Dias de Culto por Comum</CardTitle>
-              <CardDescription className="text-muted-foreground">
-                ✓ = Há culto neste dia
-              </CardDescription>
-            </div>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={exportarImagem}
-              disabled={exportando !== null}
-              className="border-accent/30 text-accent hover:bg-accent hover:text-white flex gap-2"
-            >
-              <Download className="w-4 h-4" />
-              {exportando === "imagem" ? "Exportando..." : "Imagem"}
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={exportarPDF}
-              disabled={exportando !== null}
-              className="border-accent/30 text-accent hover:bg-accent hover:text-white flex gap-2"
-            >
-              <Download className="w-4 h-4" />
-              {exportando === "pdf" ? "Exportando..." : "PDF"}
-            </Button>
+          <div>
+            <CardTitle className="text-primary">Dias de Culto por Comum</CardTitle>
+            <CardDescription className="text-muted-foreground">
+              ✓ = Há culto neste dia
+            </CardDescription>
           </div>
         </CardHeader>
         <CardContent className="overflow-x-auto">

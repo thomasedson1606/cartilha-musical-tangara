@@ -173,18 +173,20 @@ export default function CalendarioEnsaio() {
     if (!element) { alert("Elemento não encontrado para exportação."); return; }
     setExportando("pdf");
     try {
-      const canvas = await html2canvas(element, { scale: 2, useCORS: true });
+      const canvas = await html2canvas(element, { scale: 2, useCORS: true, backgroundColor: "#faf9f7" });
       const pdf = new jsPDF("l", "mm", "a4");
       const imgData = canvas.toDataURL("image/png");
-      const imgWidth = 280;
+      const pageWidth = 297;
+      const pageHeight = 210;
+      const margin = 10;
+      const imgWidth = pageWidth - 2 * margin;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      const maxHeight = 190;
+      const maxHeight = pageHeight - 2 * margin;
       if (imgHeight > maxHeight) {
-        const scaleRatio = maxHeight / imgHeight;
-        pdf.addImage(imgData, "PNG", 5, 10, imgWidth * scaleRatio, maxHeight);
+        const ratio = maxHeight / imgHeight;
+        pdf.addImage(imgData, "PNG", margin, margin, imgWidth * ratio, maxHeight);
       } else {
-        const centeredY = (210 - imgHeight) / 2;
-        pdf.addImage(imgData, "PNG", 5, centeredY, imgWidth, imgHeight);
+        pdf.addImage(imgData, "PNG", margin, (pageHeight - imgHeight) / 2, imgWidth, imgHeight);
       }
       pdf.save(`calendario-ensaios-${selectedMonth}-${selectedYear}.pdf`);
     } catch (error) {
@@ -200,7 +202,7 @@ export default function CalendarioEnsaio() {
     if (!element) { alert("Elemento não encontrado para exportação."); return; }
     setExportando("imagem");
     try {
-      const canvas = await html2canvas(element, { scale: 2, useCORS: true });
+      const canvas = await html2canvas(element, { scale: 2, useCORS: true, backgroundColor: "#faf9f7" });
       const link = document.createElement("a");
       link.href = canvas.toDataURL("image/png");
       link.download = `calendario-ensaios-${selectedMonth}-${selectedYear}.png`;
@@ -372,7 +374,14 @@ export default function CalendarioEnsaio() {
           </div>
         </CardHeader>
         <CardContent>
-          <div id="calendario-export" className="space-y-4" style={{ minWidth: "700px" }}>
+          <div id="calendario-export" className="space-y-4 bg-[#faf9f7] p-4 rounded-lg" style={{ minWidth: "700px" }}>
+            <div className="text-center space-y-1 mb-2">
+              <h2 className="text-2xl font-bold text-[#1e3a5f]" style={{ fontFamily: "'Playfair Display', serif" }}>Calendário de Ensaios</h2>
+              <p className="text-sm text-[#5a5a5a] capitalize">{monthName}</p>
+              {filtro !== "TODOS" && (
+                <p className="text-xs font-semibold" style={{ color: filtro === "TANGARÁ DA SERRA" ? "#1e3a5f" : "#1e5f3a" }}>{filtro}</p>
+              )}
+            </div>
             {/* Cabeçalho com dias da semana */}
             <div className="grid grid-cols-7 gap-1.5">
               {diasSemana.map((dia) => (
@@ -398,12 +407,12 @@ export default function CalendarioEnsaio() {
                 return (
                   <div
                     key={index}
-                    className={`min-h-20 p-1.5 border rounded-lg transition-all ${
+                    className={`min-h-20 p-1.5 border-2 rounded-lg transition-all ${
                       day
                         ? isToday
                           ? "bg-accent/10 border-accent"
-                          : "bg-white border-border/30 hover:border-accent/50"
-                        : "bg-muted/10 border-border/10"
+                          : "bg-white border-[#c8c4bf] hover:border-accent/70"
+                        : "bg-muted/10 border-[#d8d5d0]"
                     }`}
                   >
                     {day && (

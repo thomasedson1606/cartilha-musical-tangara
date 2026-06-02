@@ -85,26 +85,24 @@ export default function InstrumentosPermitidos() {
     : familias.filter(f => f.nome === familiaFiltro);
 
   const exportarPDF = async () => {
-    const familiasVisiveis = familiasFiltradas;
-    if (familiasVisiveis.length === 0) return;
+    const container = document.getElementById("instrumentos-export");
+    if (!container) return;
     setExportando("pdf");
     try {
-      const pdf = new jsPDF("l", "mm", "a4");
-      for (let i = 0; i < familiasVisiveis.length; i++) {
-        const familia = familiasVisiveis[i];
-        const element = document.getElementById(`familia-${familia.nome}`);
-        if (!element) continue;
-        if (i > 0) pdf.addPage();
-        const canvas = await html2canvas(element, { scale: 2, useCORS: true });
-        const imgData = canvas.toDataURL("image/png");
-        const imgWidth = 280;
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
-        if (imgHeight > 190) {
-          pdf.addImage(imgData, "PNG", 5, 10, imgWidth, imgHeight);
-        } else {
-          const centeredY = (210 - imgHeight) / 2;
-          pdf.addImage(imgData, "PNG", 5, centeredY, imgWidth, imgHeight);
-        }
+      const canvas = await html2canvas(container, { scale: 2, useCORS: true, backgroundColor: "#faf9f7" });
+      const pdf = new jsPDF("p", "mm", "a4");
+      const imgData = canvas.toDataURL("image/png");
+      const pageWidth = 210;
+      const pageHeight = 297;
+      const margin = 10;
+      const imgWidth = pageWidth - 2 * margin;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      const maxHeight = pageHeight - 2 * margin;
+      if (imgHeight > maxHeight) {
+        const ratio = maxHeight / imgHeight;
+        pdf.addImage(imgData, "PNG", margin, margin, imgWidth * ratio, maxHeight);
+      } else {
+        pdf.addImage(imgData, "PNG", margin, (pageHeight - imgHeight) / 2, imgWidth, imgHeight);
       }
       pdf.save("instrumentos-permitidos.pdf");
     } catch (error) {
@@ -121,7 +119,7 @@ export default function InstrumentosPermitidos() {
     try {
       const container = document.getElementById("instrumentos-export");
       if (!container) return;
-      const canvas = await html2canvas(container, { scale: 2, useCORS: true });
+      const canvas = await html2canvas(container, { scale: 2, useCORS: true, backgroundColor: "#faf9f7" });
       const link = document.createElement("a");
       link.href = canvas.toDataURL("image/png");
       link.download = "instrumentos-permitidos.png";
@@ -250,7 +248,14 @@ export default function InstrumentosPermitidos() {
       )}
 
       {/* Tabelas + Observações para export */}
-      <div id="instrumentos-export" className="space-y-8">
+      <div id="instrumentos-export" className="space-y-8 bg-[#faf9f7] p-6 rounded-lg">
+        <div className="text-center space-y-2 mb-2">
+          <h2 className="text-3xl font-bold text-[#1e3a5f]" style={{ fontFamily: "'Playfair Display', serif" }}>Instrumentos Permitidos</h2>
+          <p className="text-sm text-[#5a5a5a]">Voz principal e alternativa para cada instrumento na orquestra</p>
+          {familiaFiltro !== "TODAS" && (
+            <p className="text-sm font-semibold text-[#d4a574]">Família: {familiaFiltro}</p>
+          )}
+        </div>
         <div className="space-y-8">
         {familiasFiltradas.map((familia) => (
           <div key={familia.nome} id={`familia-${familia.nome}`}>
