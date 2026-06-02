@@ -1,7 +1,7 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Music, Users, Clock, BookOpen, Zap, Calendar, Globe, ExternalLink, Church } from "lucide-react";
+import { Music, Users, Clock, BookOpen, Zap, Calendar, Globe, ExternalLink, CalendarDays } from "lucide-react";
 import { Link } from "wouter";
 
 const menuItems = [
@@ -83,7 +83,7 @@ const menuItems = [
     color: "text-cyan-600",
   },
   {
-    icon: Church,
+    icon: CalendarDays,
     title: "Cultos em Tangará da Serra",
     description: "Dias e horários dos cultos em todas as comunas",
     href: "/cultos-tangara",

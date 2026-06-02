@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft, Download, Church } from "lucide-react";
+import { ArrowLeft, Download, CalendarDays } from "lucide-react";
 import { useLocation } from "wouter";
 import html2canvas from "html2canvas";
 
@@ -79,7 +79,7 @@ export default function CultosTangara() {
 
       <div className="text-center space-y-4">
         <div className="flex justify-center">
-          <Church className="w-12 h-12 text-accent" />
+          <CalendarDays className="w-12 h-12 text-accent" />
         </div>
         <h1 className="text-4xl font-bold text-primary">Cultos em Tangará da Serra</h1>
         <p className="text-lg text-muted-foreground">
@@ -108,17 +108,17 @@ export default function CultosTangara() {
           </div>
         </CardHeader>
         <CardContent className="overflow-x-auto">
-          <div id="tabela-export" className="min-w-max">
-            <table className="w-full border-collapse">
+          <div id="tabela-export">
+            <table className="w-full border-collapse text-sm">
               <thead>
                 <tr className="border-b-2 border-accent/20">
-                  <th className="text-left text-primary font-bold py-3 px-3 min-w-[220px]">
+                  <th className="text-left text-primary font-semibold py-2 px-2 whitespace-nowrap">
                     COMUM CONGREGAÇÃO
                   </th>
                   {colunas.map((col) => (
                     <th
                       key={col}
-                      className="text-center text-primary font-bold py-3 px-3 min-w-[60px]"
+                      className="text-center text-primary font-semibold py-2 px-2 w-[52px]"
                     >
                       {col}
                     </th>
@@ -133,20 +133,20 @@ export default function CultosTangara() {
                       idx % 2 === 0 ? "bg-secondary/10" : ""
                     } hover:bg-accent/5`}
                   >
-                    <td className="py-3 px-3 font-medium text-foreground">
+                    <td className="py-1.5 px-2 font-medium text-foreground text-xs whitespace-nowrap">
                       {culto.comum}
                     </td>
                     {colunas.map((col) => {
                       const key = getKey(col);
                       const temCulto = culto[key];
                       return (
-                        <td key={col} className="text-center py-3 px-3">
+                        <td key={col} className="text-center py-1.5 px-2">
                           {temCulto ? (
-                            <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-100 text-green-700 font-bold text-lg">
+                            <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-green-100 text-green-700 font-bold text-xs">
                               ✓
                             </span>
                           ) : (
-                            <span className="text-muted-foreground/30">—</span>
+                            <span className="text-muted-foreground/20">—</span>
                           )}
                         </td>
                       );
