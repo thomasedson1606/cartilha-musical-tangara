@@ -3,7 +3,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
-import { ThemeProvider } from "./contexts/ThemeContext";
+import { ThemeProvider, useTheme } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import EnsaiosLocaisTangara from "./pages/EnsaiosLocaisTangara";
 import EnsaiosLocaisRegiao from "./pages/EnsaiosLocaisRegiao";
@@ -18,21 +18,35 @@ import PosicaoOrquestra from "./pages/PosicaoOrquestra";
 import CalendarioEnsaio from "./pages/CalendarioEnsaio";
 import CultosTangara from "./pages/CultosTangara";
 import InstrumentosPermitidos from "./pages/InstrumentosPermitidos";
-import { Music } from "lucide-react";
+import { Music, Sun, Moon } from "lucide-react";
 
 function PageLayout({ children }: { children: React.ReactNode }) {
+  const { theme, toggleTheme } = useTheme();
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
       {/* Header */}
-      <header className="border-b border-border/30 bg-white shadow-sm sticky top-0 z-50">
-        <div className="container max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Music className="w-8 h-8 text-accent" />
-            <div>
-              <h1 className="text-xl font-bold text-primary">Cartilha Musical</h1>
-              <p className="text-xs text-muted-foreground">Tangará da Serra e Região</p>
+      <header className="border-b border-border/30 bg-card shadow-sm sticky top-0 z-50">
+        <div className="container max-w-6xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3 min-w-0">
+            <Music className="w-8 h-8 text-accent shrink-0" />
+            <div className="truncate">
+              <h1 className="text-xl font-bold text-primary truncate">Cartilha Musical</h1>
+              <p className="text-xs text-muted-foreground truncate">Tangará da Serra e Região</p>
             </div>
           </div>
+          {toggleTheme && (
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg border border-border/30 bg-background hover:bg-secondary/20 transition-colors shrink-0"
+              title={theme === "light" ? "Modo escuro" : "Modo claro"}
+            >
+              {theme === "light" ? (
+                <Moon className="w-5 h-5 text-primary" />
+              ) : (
+                <Sun className="w-5 h-5 text-accent" />
+              )}
+            </button>
+          )}
         </div>
       </header>
 
@@ -163,7 +177,7 @@ function Router() {
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="light">
+      <ThemeProvider defaultTheme="light" switchable={true}>
         <TooltipProvider>
           <Toaster />
           <Router />
