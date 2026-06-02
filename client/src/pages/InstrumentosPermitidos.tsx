@@ -73,24 +73,39 @@ export default function InstrumentosPermitidos() {
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
   const [filtroInstrumento, setFiltroInstrumento] = useState("TODOS");
+  const [familiaFiltro, setFamiliaFiltro] = useState("TODAS");
+  const [exportando, setExportando] = useState<"imagem" | "pdf" | null>(null);
 
   const instrumentoSelecionado = filtroInstrumento !== "TODOS"
     ? todosInstrumentos.find(i => i.nome === filtroInstrumento)
     : null;
 
-  const [exportando, setExportando] = useState<"imagem" | "pdf" | null>(null);
+  const familiasFiltradas = familiaFiltro === "TODAS"
+    ? familias
+    : familias.filter(f => f.nome === familiaFiltro);
 
   const exportarPDF = async () => {
-    const element = document.getElementById("tabela-export");
-    if (!element) { alert("Elemento não encontrado para exportação."); return; }
+    const familiasVisiveis = familiasFiltradas;
+    if (familiasVisiveis.length === 0) return;
     setExportando("pdf");
     try {
-      const canvas = await html2canvas(element, { scale: 2, useCORS: true });
       const pdf = new jsPDF("l", "mm", "a4");
-      const imgData = canvas.toDataURL("image/png");
-      const imgWidth = 280;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      pdf.addImage(imgData, "PNG", 5, 10, imgWidth, imgHeight);
+      for (let i = 0; i < familiasVisiveis.length; i++) {
+        const familia = familiasVisiveis[i];
+        const element = document.getElementById(`familia-${familia.nome}`);
+        if (!element) continue;
+        if (i > 0) pdf.addPage();
+        const canvas = await html2canvas(element, { scale: 2, useCORS: true });
+        const imgData = canvas.toDataURL("image/png");
+        const imgWidth = 280;
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        if (imgHeight > 190) {
+          pdf.addImage(imgData, "PNG", 5, 10, imgWidth, imgHeight);
+        } else {
+          const centeredY = (210 - imgHeight) / 2;
+          pdf.addImage(imgData, "PNG", 5, centeredY, imgWidth, imgHeight);
+        }
+      }
       pdf.save("instrumentos-permitidos.pdf");
     } catch (error) {
       alert("Erro ao exportar PDF: " + (error instanceof Error ? error.message : error));
@@ -100,11 +115,13 @@ export default function InstrumentosPermitidos() {
   };
 
   const exportarImagem = async () => {
-    const element = document.getElementById("tabela-export");
-    if (!element) { alert("Elemento não encontrado para exportação."); return; }
+    const familiasVisiveis = familiasFiltradas;
+    if (familiasVisiveis.length === 0) return;
     setExportando("imagem");
     try {
-      const canvas = await html2canvas(element, { scale: 2, useCORS: true });
+      const container = document.getElementById("instrumentos-export");
+      if (!container) return;
+      const canvas = await html2canvas(container, { scale: 2, useCORS: true });
       const link = document.createElement("a");
       link.href = canvas.toDataURL("image/png");
       link.download = "instrumentos-permitidos.png";
@@ -143,7 +160,7 @@ export default function InstrumentosPermitidos() {
         <CardHeader>
           <CardTitle className="text-primary">Filtrar e Exportar</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="space-y-4">
           <div className="flex gap-4 items-center justify-center flex-wrap">
             <div className="w-64">
               <Select value={filtroInstrumento} onValueChange={setFiltroInstrumento}>
@@ -181,6 +198,24 @@ export default function InstrumentosPermitidos() {
               {exportando === "pdf" ? "Exportando..." : "PDF"}
             </Button>
           </div>
+          <div className="flex gap-2 items-center justify-center flex-wrap">
+            <span className="text-sm text-muted-foreground">Filtrar por família:</span>
+            {["TODAS", "Cordas", "Madeiras", "Metais"].map((fam) => (
+              <Button
+                key={fam}
+                variant={familiaFiltro === fam ? "default" : "outline"}
+                size="sm"
+                onClick={() => setFamiliaFiltro(fam)}
+                className={
+                  familiaFiltro === fam
+                    ? "bg-accent text-white"
+                    : "border-accent/30 text-accent hover:bg-accent hover:text-white"
+                }
+              >
+                {fam}
+              </Button>
+            ))}
+          </div>
         </CardContent>
       </Card>
 
@@ -215,45 +250,47 @@ export default function InstrumentosPermitidos() {
       )}
 
       {/* Tabelas */}
-      <div id="tabela-export" className="space-y-8">
-        {familias.map((familia) => (
-          <Card key={familia.nome} className="border-border/50">
-            <CardHeader>
-              <CardTitle className="text-primary">{familia.nome}</CardTitle>
-            </CardHeader>
-            <CardContent className="overflow-x-auto">
-              <table className="w-full border-collapse text-sm">
-                <thead>
-                  <tr className="bg-primary">
-                    <th className="text-left text-white font-semibold py-3 px-3">Instrumento</th>
-                    <th className="text-center text-white font-semibold py-3 px-3">Tom</th>
-                    <th className="text-center text-white font-semibold py-3 px-3">Afinação</th>
-                    <th className="text-center text-white font-semibold py-3 px-3">Voz Principal</th>
-                    <th className="text-center text-white font-semibold py-3 px-3">Voz Alternativa</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {familia.instrumentos.map((inst, idx) => (
-                    <tr
-                      key={inst.nome}
-                      className={`border-b border-border/20 transition-colors ${
-                        idx % 2 === 0 ? "bg-secondary/10" : ""
-                      } hover:bg-accent/5 ${
-                        filtroInstrumento !== "TODOS" && filtroInstrumento === inst.nome ? "bg-accent/20 ring-2 ring-accent" : ""
-                      }`}
-                      id={filtroInstrumento !== "TODOS" && filtroInstrumento === inst.nome ? "instrumento-destacado" : undefined}
-                    >
-                      <td className="py-2.5 px-3 font-medium text-foreground">{inst.nome}</td>
-                      <td className="text-center py-2.5 px-3 text-foreground">{inst.tom}</td>
-                      <td className="text-center py-2.5 px-3 text-foreground">{inst.afinacao}</td>
-                      <td className="text-center py-2.5 px-3 text-foreground">{inst.vozPrincipal}</td>
-                      <td className="text-center py-2.5 px-3 text-foreground">{inst.vozAlternativa || "—"}</td>
+      <div id="instrumentos-export" className="space-y-8">
+        {familiasFiltradas.map((familia) => (
+          <div key={familia.nome} id={`familia-${familia.nome}`}>
+            <Card className="border-border/50">
+              <CardHeader>
+                <CardTitle className="text-primary">{familia.nome}</CardTitle>
+              </CardHeader>
+              <CardContent className="overflow-x-auto">
+                <table className="w-full border-collapse text-sm">
+                  <thead>
+                    <tr className="bg-primary">
+                      <th className="text-left text-white font-semibold py-3 px-3">Instrumento</th>
+                      <th className="text-center text-white font-semibold py-3 px-3">Tom</th>
+                      <th className="text-center text-white font-semibold py-3 px-3">Afinação</th>
+                      <th className="text-center text-white font-semibold py-3 px-3">Voz Principal</th>
+                      <th className="text-center text-white font-semibold py-3 px-3">Voz Alternativa</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </CardContent>
-          </Card>
+                  </thead>
+                  <tbody>
+                    {familia.instrumentos.map((inst, idx) => (
+                      <tr
+                        key={inst.nome}
+                        className={`border-b border-border/20 transition-colors ${
+                          idx % 2 === 0 ? "bg-secondary/10" : ""
+                        } hover:bg-accent/5 ${
+                          filtroInstrumento !== "TODOS" && filtroInstrumento === inst.nome ? "bg-accent/20 ring-2 ring-accent" : ""
+                        }`}
+                        id={filtroInstrumento !== "TODOS" && filtroInstrumento === inst.nome ? "instrumento-destacado" : undefined}
+                      >
+                        <td className="py-2.5 px-3 font-medium text-foreground">{inst.nome}</td>
+                        <td className="text-center py-2.5 px-3 text-foreground">{inst.tom}</td>
+                        <td className="text-center py-2.5 px-3 text-foreground">{inst.afinacao}</td>
+                        <td className="text-center py-2.5 px-3 text-foreground">{inst.vozPrincipal}</td>
+                        <td className="text-center py-2.5 px-3 text-foreground">{inst.vozAlternativa || "—"}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </CardContent>
+            </Card>
+          </div>
         ))}
       </div>
 

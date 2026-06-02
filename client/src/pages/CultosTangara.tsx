@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ArrowLeft, Download, CalendarDays } from "lucide-react";
 import { useLocation } from "wouter";
 import html2canvas from "html2canvas-pro";
+import jsPDF from "jspdf";
 
 interface Culto {
   comum: string;
@@ -51,16 +52,21 @@ const getKey = (coluna: Coluna): keyof Culto => {
 
 export default function CultosTangara() {
   const [, navigate] = useLocation();
-  const [exportando, setExportando] = useState(false);
+  const [exportando, setExportando] = useState<"imagem" | "pdf" | null>(null);
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
-  const exportarImagem = async () => {
+  const capturarTabela = async () => {
     const element = document.getElementById("tabela-export");
-    if (!element) { alert("Elemento não encontrado para exportação."); return; }
-    setExportando(true);
+    if (!element) { alert("Elemento não encontrado para exportação."); return null; }
+    return await html2canvas(element, { scale: 2, useCORS: true });
+  };
+
+  const exportarImagem = async () => {
+    setExportando("imagem");
     try {
-      const canvas = await html2canvas(element, { scale: 2, useCORS: true });
+      const canvas = await capturarTabela();
+      if (!canvas) return;
       const link = document.createElement("a");
       link.href = canvas.toDataURL("image/png");
       link.download = "cultos-tangara-da-serra.png";
@@ -68,7 +74,25 @@ export default function CultosTangara() {
     } catch (error) {
       alert("Erro ao exportar imagem: " + (error instanceof Error ? error.message : error));
     } finally {
-      setExportando(false);
+      setExportando(null);
+    }
+  };
+
+  const exportarPDF = async () => {
+    setExportando("pdf");
+    try {
+      const canvas = await capturarTabela();
+      if (!canvas) return;
+      const pdf = new jsPDF("l", "mm", "a4");
+      const imgData = canvas.toDataURL("image/png");
+      const imgWidth = 280;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      pdf.addImage(imgData, "PNG", 5, 10, imgWidth, imgHeight);
+      pdf.save("cultos-tangara-da-serra.pdf");
+    } catch (error) {
+      alert("Erro ao exportar PDF: " + (error instanceof Error ? error.message : error));
+    } finally {
+      setExportando(null);
     }
   };
 
@@ -107,15 +131,26 @@ export default function CultosTangara() {
               variant="outline"
               size="sm"
               onClick={exportarImagem}
+              disabled={exportando !== null}
               className="border-accent/30 text-accent hover:bg-accent hover:text-white flex gap-2"
             >
               <Download className="w-4 h-4" />
-              {exportando ? "Exportando..." : "Exportar Imagem"}
+              {exportando === "imagem" ? "Exportando..." : "Imagem"}
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={exportarPDF}
+              disabled={exportando !== null}
+              className="border-accent/30 text-accent hover:bg-accent hover:text-white flex gap-2"
+            >
+              <Download className="w-4 h-4" />
+              {exportando === "pdf" ? "Exportando..." : "PDF"}
             </Button>
           </div>
         </CardHeader>
         <CardContent className="overflow-x-auto">
-          <div id="tabela-export">
+          <div id="tabela-export" style={{ minWidth: "800px" }}>
             <table className="w-full border-collapse text-sm">
               <thead>
                 <tr className="border-b-2 border-accent/20">

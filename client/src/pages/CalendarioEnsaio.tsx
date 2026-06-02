@@ -174,11 +174,18 @@ export default function CalendarioEnsaio() {
     setExportando("pdf");
     try {
       const canvas = await html2canvas(element, { scale: 2, useCORS: true });
-      const pdf = new jsPDF("p", "mm", "a4");
+      const pdf = new jsPDF("l", "mm", "a4");
       const imgData = canvas.toDataURL("image/png");
-      const imgWidth = 210;
+      const imgWidth = 280;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+      const maxHeight = 190;
+      if (imgHeight > maxHeight) {
+        const scaleRatio = maxHeight / imgHeight;
+        pdf.addImage(imgData, "PNG", 5, 10, imgWidth * scaleRatio, maxHeight);
+      } else {
+        const centeredY = (210 - imgHeight) / 2;
+        pdf.addImage(imgData, "PNG", 5, centeredY, imgWidth, imgHeight);
+      }
       pdf.save(`calendario-ensaios-${selectedMonth}-${selectedYear}.pdf`);
     } catch (error) {
       alert("Erro ao exportar PDF: " + (error instanceof Error ? error.message : error));
@@ -365,13 +372,13 @@ export default function CalendarioEnsaio() {
           </div>
         </CardHeader>
         <CardContent>
-          <div id="calendario-export" className="space-y-4">
+          <div id="calendario-export" className="space-y-4" style={{ minWidth: "700px" }}>
             {/* Cabeçalho com dias da semana */}
-            <div className="grid grid-cols-7 gap-2">
+            <div className="grid grid-cols-7 gap-1.5">
               {diasSemana.map((dia) => (
                 <div
                   key={dia}
-                  className="text-center font-semibold text-primary text-sm py-2 border-b-2 border-accent/20"
+                  className="text-center font-semibold text-primary text-sm py-2 border-b border-accent/10"
                 >
                   {dia}
                 </div>
@@ -379,7 +386,7 @@ export default function CalendarioEnsaio() {
             </div>
 
             {/* Dias do calendário */}
-            <div className="grid grid-cols-7 gap-2">
+            <div className="grid grid-cols-7 gap-1.5">
               {calendarDays.map((day, index) => {
                 const ensaios = day ? getEnsaiosPorDia(day) : [];
                 const isToday =
@@ -391,12 +398,12 @@ export default function CalendarioEnsaio() {
                 return (
                   <div
                     key={index}
-                    className={`min-h-24 p-2 border rounded-lg transition-all ${
+                    className={`min-h-20 p-1.5 border border-border/10 rounded-lg transition-all ${
                       day
                         ? isToday
-                          ? "bg-accent/10 border-accent"
-                          : "border-border/30 hover:border-accent/50"
-                        : "bg-muted/20"
+                          ? "bg-accent/5 border-accent/40"
+                          : "hover:border-accent/30"
+                        : "bg-muted/5"
                     }`}
                   >
                     {day && (
