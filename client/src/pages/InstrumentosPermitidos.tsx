@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ArrowLeft, Download, Music } from "lucide-react";
+import { ArrowLeft, Download, Saxophone } from "lucide-react";
 import { useLocation } from "wouter";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
@@ -120,7 +120,7 @@ export default function InstrumentosPermitidos() {
 
       <div className="text-center space-y-4">
         <div className="flex justify-center">
-          <Music className="w-12 h-12 text-accent" />
+          <Saxophone className="w-12 h-12 text-accent" />
         </div>
         <h1 className="text-4xl font-bold text-primary">Instrumentos Permitidos</h1>
         <p className="text-lg text-muted-foreground">
@@ -138,9 +138,10 @@ export default function InstrumentosPermitidos() {
             <div className="w-64">
               <Select value={filtroInstrumento} onValueChange={setFiltroInstrumento}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Selecione um instrumento..." />
+                  <SelectValue placeholder="Todos os instrumentos" />
                 </SelectTrigger>
                 <SelectContent>
+                  <SelectItem value="">Todos</SelectItem>
                   {todosInstrumentos.map((inst) => (
                     <SelectItem key={inst.nome} value={inst.nome}>
                       {inst.nome}

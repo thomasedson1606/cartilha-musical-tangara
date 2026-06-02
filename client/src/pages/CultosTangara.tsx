@@ -167,7 +167,7 @@ export default function CultosTangara() {
           <p>• Os cultos durante a semana são às <strong>19:30</strong> horas.</p>
           <p>• Cultos de Domingo são às <strong>19:00</strong> horas.</p>
           <p>• <strong>Distrito Vila São Joaquim</strong> e <strong>Distrito São Jorge</strong>: Domingo às <strong>15:00</strong> horas.</p>
-          <p>• <strong>RJM</strong> (Reunião de Jovens e Menores): Domingo às <strong>09:00</strong> horas nas comunas indicadas.</p>
+          <p>• <strong>RJM</strong> (Reunião de Jovens e Menores): Domingo às <strong>09:00</strong> horas nas comuns indicadas.</p>
         </CardContent>
       </Card>
     </div>
