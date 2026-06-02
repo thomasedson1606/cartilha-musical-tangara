@@ -70,9 +70,9 @@ const todosInstrumentos = familias.flatMap(f => f.instrumentos.map(i => ({ ...i,
 
 export default function InstrumentosPermitidos() {
   const [, navigate] = useLocation();
-  const [filtroInstrumento, setFiltroInstrumento] = useState("");
+  const [filtroInstrumento, setFiltroInstrumento] = useState("TODOS");
 
-  const instrumentoSelecionado = filtroInstrumento
+  const instrumentoSelecionado = filtroInstrumento !== "TODOS"
     ? todosInstrumentos.find(i => i.nome === filtroInstrumento)
     : null;
 
@@ -138,10 +138,10 @@ export default function InstrumentosPermitidos() {
             <div className="w-64">
               <Select value={filtroInstrumento} onValueChange={setFiltroInstrumento}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Todos os instrumentos" />
+                  <SelectValue placeholder="Selecione um instrumento..." />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">Todos</SelectItem>
+                  <SelectItem value="TODOS">Todos</SelectItem>
                   {todosInstrumentos.map((inst) => (
                     <SelectItem key={inst.nome} value={inst.nome}>
                       {inst.nome}
@@ -227,9 +227,9 @@ export default function InstrumentosPermitidos() {
                       className={`border-b border-border/20 transition-colors ${
                         idx % 2 === 0 ? "bg-secondary/10" : ""
                       } hover:bg-accent/5 ${
-                        filtroInstrumento === inst.nome ? "bg-accent/20 ring-2 ring-accent" : ""
+                        filtroInstrumento !== "TODOS" && filtroInstrumento === inst.nome ? "bg-accent/20 ring-2 ring-accent" : ""
                       }`}
-                      id={filtroInstrumento === inst.nome ? "instrumento-destacado" : undefined}
+                      id={filtroInstrumento !== "TODOS" && filtroInstrumento === inst.nome ? "instrumento-destacado" : undefined}
                     >
                       <td className="py-2.5 px-3 font-medium text-foreground">{inst.nome}</td>
                       <td className="text-center py-2.5 px-3 text-foreground">{inst.tom}</td>
