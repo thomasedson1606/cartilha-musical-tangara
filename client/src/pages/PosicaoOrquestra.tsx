@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,6 +8,7 @@ import cartilhaData from "../cartilha-data.json";
 export default function PosicaoOrquestra() {
   const [, navigate] = useLocation();
   const { posicaoOrquestra } = cartilhaData;
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   const familiaColors: Record<string, { bg: string; border: string; text: string }> = {
     "Cordas": { bg: "bg-blue-50", border: "border-blue-200", text: "text-blue-700" },

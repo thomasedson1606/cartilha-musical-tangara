@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/select";
 import { ArrowLeft, Download, Music3 } from "lucide-react";
 import { useLocation } from "wouter";
-import html2canvas from "html2canvas";
+import html2canvas from "html2canvas-pro";
 import jsPDF from "jspdf";
 
 interface Instrumento {
@@ -70,6 +70,8 @@ const todosInstrumentos = familias.flatMap(f => f.instrumentos.map(i => ({ ...i,
 
 export default function InstrumentosPermitidos() {
   const [, navigate] = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, []);
+
   const [filtroInstrumento, setFiltroInstrumento] = useState("TODOS");
 
   const instrumentoSelecionado = filtroInstrumento !== "TODOS"

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter";
 import InfoCard from "@/components/InfoCard";
@@ -8,6 +9,7 @@ import cartilhaData from "../cartilha-data.json";
 export default function Recomendacoes() {
   const [, navigate] = useLocation();
   const { recomendacoes } = cartilhaData;
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
     <div className="space-y-8">

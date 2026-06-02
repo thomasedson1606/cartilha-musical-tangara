@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Music, ArrowLeft, Download } from "lucide-react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
@@ -17,7 +17,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import html2canvas from "html2canvas";
+import html2canvas from "html2canvas-pro";
 import jsPDF from "jspdf";
 import cartilhaData from "../cartilha-data.json";
 
@@ -38,6 +38,9 @@ export default function CalendarioEnsaio() {
   const [filtro, setFiltro] = useState("TODOS");
   const [selectedEnsaio, setSelectedEnsaio] = useState<Ensaio | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [exportando, setExportando] = useState<"imagem" | "pdf" | null>(null);
+
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   // Combinar ensaios de Tangará e Região
   const allEnsaios = [
@@ -167,10 +170,10 @@ export default function CalendarioEnsaio() {
   // Exportar calendário como PDF
   const exportarPDF = async () => {
     const element = document.getElementById("calendario-export");
-    if (!element) return;
-
+    if (!element) { alert("Elemento não encontrado para exportação."); return; }
+    setExportando("pdf");
     try {
-      const canvas = await html2canvas(element, { scale: 2 });
+      const canvas = await html2canvas(element, { scale: 2, useCORS: true });
       const pdf = new jsPDF("p", "mm", "a4");
       const imgData = canvas.toDataURL("image/png");
       const imgWidth = 210;
@@ -178,23 +181,27 @@ export default function CalendarioEnsaio() {
       pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
       pdf.save(`calendario-ensaios-${selectedMonth}-${selectedYear}.pdf`);
     } catch (error) {
-      console.error("Erro ao exportar PDF:", error);
+      alert("Erro ao exportar PDF: " + (error instanceof Error ? error.message : error));
+    } finally {
+      setExportando(null);
     }
   };
 
   // Exportar calendário como imagem
   const exportarImagem = async () => {
     const element = document.getElementById("calendario-export");
-    if (!element) return;
-
+    if (!element) { alert("Elemento não encontrado para exportação."); return; }
+    setExportando("imagem");
     try {
-      const canvas = await html2canvas(element, { scale: 2 });
+      const canvas = await html2canvas(element, { scale: 2, useCORS: true });
       const link = document.createElement("a");
       link.href = canvas.toDataURL("image/png");
       link.download = `calendario-ensaios-${selectedMonth}-${selectedYear}.png`;
       link.click();
     } catch (error) {
-      console.error("Erro ao exportar imagem:", error);
+      alert("Erro ao exportar imagem: " + (error instanceof Error ? error.message : error));
+    } finally {
+      setExportando(null);
     }
   };
 
@@ -313,20 +320,22 @@ export default function CalendarioEnsaio() {
               variant="outline"
               size="sm"
               onClick={exportarPDF}
+              disabled={exportando !== null}
               className="border-accent/30 text-accent hover:bg-accent hover:text-white flex gap-2"
             >
               <Download className="w-4 h-4" />
-              PDF
+              {exportando === "pdf" ? "Exportando..." : "PDF"}
             </Button>
 
             <Button
               variant="outline"
               size="sm"
               onClick={exportarImagem}
+              disabled={exportando !== null}
               className="border-accent/30 text-accent hover:bg-accent hover:text-white flex gap-2"
             >
               <Download className="w-4 h-4" />
-              Imagem
+              {exportando === "imagem" ? "Exportando..." : "Imagem"}
             </Button>
           </div>
         </CardContent>

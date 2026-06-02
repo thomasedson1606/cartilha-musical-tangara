@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, Download, CalendarDays } from "lucide-react";
 import { useLocation } from "wouter";
-import html2canvas from "html2canvas";
+import html2canvas from "html2canvas-pro";
 
 interface Culto {
   comum: string;
@@ -52,6 +52,8 @@ const getKey = (coluna: Coluna): keyof Culto => {
 export default function CultosTangara() {
   const [, navigate] = useLocation();
   const [exportando, setExportando] = useState(false);
+
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   const exportarImagem = async () => {
     const element = document.getElementById("tabela-export");

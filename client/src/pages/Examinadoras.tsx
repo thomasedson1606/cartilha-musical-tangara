@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter";
@@ -6,6 +7,7 @@ import cartilhaData from "../cartilha-data.json";
 
 export default function Examinadoras() {
   const [, navigate] = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, []);
   return (
     <div className="space-y-8">
       <Button

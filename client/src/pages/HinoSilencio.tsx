@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,7 +8,7 @@ import cartilhaData from "../cartilha-data.json";
 export default function HinoSilencio() {
   const [, navigate] = useLocation();
   const { hinoSilencio } = cartilhaData;
-
+  useEffect(() => { window.scrollTo(0, 0); }, []);
   return (
     <div className="space-y-8">
       <Button

@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter";
@@ -15,6 +15,7 @@ interface Encarregado {
 export default function EncarregadosLocais() {
   const [, navigate] = useLocation();
   const [filtro, setFiltro] = useState("TODOS");
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   const encarregadosRegiao: Encarregado[] = cartilhaData.ensaiosLocaisRegiao.map(e => ({
     nome: e.encarregado,

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,6 +9,7 @@ import cartilhaData from "../cartilha-data.json";
 export default function OndePossoTocar() {
   const [, navigate] = useLocation();
   const { ondePossoTocar } = cartilhaData;
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   const renderCell = (value: string) => {
     if (value === "Sim") {
