@@ -378,7 +378,7 @@ export default function CalendarioEnsaio() {
               {diasSemana.map((dia) => (
                 <div
                   key={dia}
-                  className="text-center font-semibold text-primary text-sm py-2 border-b border-accent/10"
+                  className="text-center font-semibold text-primary text-sm py-2 border-b-2 border-border/30"
                 >
                   {dia}
                 </div>
@@ -398,12 +398,12 @@ export default function CalendarioEnsaio() {
                 return (
                   <div
                     key={index}
-                    className={`min-h-20 p-1.5 border border-border/10 rounded-lg transition-all ${
+                    className={`min-h-20 p-1.5 border rounded-lg transition-all ${
                       day
                         ? isToday
-                          ? "bg-accent/5 border-accent/40"
-                          : "hover:border-accent/30"
-                        : "bg-muted/5"
+                          ? "bg-accent/10 border-accent"
+                          : "bg-white border-border/30 hover:border-accent/50"
+                        : "bg-muted/10 border-border/10"
                     }`}
                   >
                     {day && (
